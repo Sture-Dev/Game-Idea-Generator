@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Idea Generator</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <template id = "welcome_page">
+        <h1>Gane Mechanic Generator</h1>
+        <p><br>Do you want to make a game but don't know how to make it unique? Use this tool to generate new twists for your favorite game genre!<br><br><b>No signup. No tracking.</b></p>
+        <button id="confirm_button" onclick="reset()">Let's Go</button>
+    </template>
+    <template id="q1">
+        <h1>Genre</h1>
+        <p id="question">Choose a game genre toadd a twist to</p>
+        <form onsubmit="genre(this); return false;">
+            <div id="radio_div">
+                <input type="radio" name="options" id="platformer">
+                <label for="platformer">2D Platformer</label>
+
+                <input type="radio" name="options" id="farming">
+                <label for="farming">Cozy Farming</label>
+
+                <input type="radio" name="options" id="survival">
+                <label for="survival">Survival</label>
+
+                <input type="radio" name="options" id="puzzle">
+                <label for="puzzle">Puzzle</label>
+
+            </div>
+            <input type="submit" id="confirm_button" value="Confirm">
+        </form>
+    </template>
+</head>
+
+<body onload="load()">
+    <main>
+        <div id="form_holder">
+
+        </div>
+        
+        <div id="contact_info">
+            <h2 class="contact_label">Collabs/Feedback</h2>
+            <button id="contact_button" onclick="showEmail()">CONTACT</button>
+            <span id="email"></span>
+        </div>
+    </main>
+</body>
+
+</html>
