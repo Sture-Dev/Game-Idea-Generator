@@ -20,7 +20,7 @@
 
     --confirm-main: #7ee787;
     --confirm-strong: #4ade80;
-
+    
     --shadow-soft: rgba(0, 0, 0, 0.35);
     --shadow-blue: rgba(81, 182, 222, 0.299);
     --shadow-green: rgba(81, 222, 95, 0.299);
@@ -160,24 +160,6 @@ p {
     color: #1f2d1f;
     transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
 }
-/* Submit button */
-#reset_button {
-    width: 100%;
-    padding: 0.9rem;
-    border-radius: 12px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-        background: linear-gradient(
-        135deg,
-        var(--confirm-main),
-        var(--confirm-strong)
-    );
-    color: #1f2d1f;
-    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
-}
-
 #confirm_button:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 22px var(--shadow-green);
@@ -187,6 +169,48 @@ p {
 #confirm_button:active {
     transform: translateY(0);
     box-shadow: 0 4px 10px var(--shadow-green);
+}
+
+
+
+.big_button {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(
+        135deg,
+        var(--confirm-main),
+        var(--confirm-strong)
+    );
+    color: #1f2d1f;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+.big_button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px var(--shadow-green);
+    filter: brightness(1.05);
+}
+
+.big_button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px var(--shadow-green);
+}
+
+#back_button{
+    margin-top: 20px;
+    background: linear-gradient(
+        135deg,
+        var(--accent-main),
+        var(--accent-strong)
+    );
+}
+#back_button:hover {
+    box-shadow: 0 10px 22px var(--shadow-blue);
 }
 
 #skip_button {

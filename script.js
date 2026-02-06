@@ -8,17 +8,19 @@ function load() {
 // Create skip button
 const regenButton = document.createElement("button");
 regenButton.id = "regen_button";
+regenButton.classList.add("big_button");
 regenButton.type = "button";
 regenButton.textContent = "Regenerate";
-regenButton.addEventListener("click", nextQuestion);
+regenButton.addEventListener("click", gather_data);
 
-// Create restart button
-const resetButton = document.createElement("button");
-resetButton.id = "reset_button";
-resetButton.type = "button";
-resetButton.textContent = "Reset"
-resetButton.addEventListener("click", reset);
 
+// Back button
+const backButton = document.createElement("button");
+backButton.classList.add("big_button");
+backButton.id = "back_button";
+backButton.type = "button";
+backButton.textContent = "Reset"
+backButton.addEventListener("click", reset);
 
 const GENRES = {
     platformer: {
@@ -115,20 +117,11 @@ function showQuestion(id) {
 function showResult(genre, twist) {
     const holder = document.getElementById("form_holder");
     holder.innerHTML = `
-    <h2>${genre}</h2>
-    <h1>${twist}</h1>   
+    <h1>${genre}</h1>
+    <h2>${twist}</h2>   
 `;
-    holder.appendChild(resetButton);
-    const disclaimerTitle = document.createElement("h2");
-    disclaimerTitle.id = "disclaimer";
-    disclaimerTitle.textContent = "Disclaimer";
-
-    const disclaimerText = document.createElement("p");
-    disclaimerText.textContent =
-        "This is an opinionated tool, not a rulebook. It’s meant to give you a good starting point. Thanks for checking in!";
-
-    holder.appendChild(disclaimerTitle);
-    holder.appendChild(disclaimerText);
+    holder.appendChild(regenButton);
+    holder.appendChild(backButton);
 }
 
 function showEmail() {
