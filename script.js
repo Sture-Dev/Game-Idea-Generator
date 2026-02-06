@@ -6,11 +6,11 @@ function load() {
 }
 
 // Create skip button
-const skipButton = document.createElement("button");
-skipButton.id = "skip_button";
-skipButton.type = "button";
-skipButton.textContent = "Skip";
-skipButton.addEventListener("click", nextQuestion);
+const regenButton = document.createElement("button");
+regenButton.id = "regen_button";
+regenButton.type = "button";
+regenButton.textContent = "Regenerate";
+regenButton.addEventListener("click", nextQuestion);
 
 // Create restart button
 const resetButton = document.createElement("button");
@@ -20,25 +20,64 @@ resetButton.textContent = "Reset"
 resetButton.addEventListener("click", reset);
 
 
-function platformer(){
+const GENRES = {
+    platformer: {
+        title: "2D Platformer",
+        twists: [
+            "But you can't jump",
+            "Where you have a grappling hook"
+        ]
+    },
+    farming: {
+        title: "Cozy Farming Game",
+        twists: [
+            "But the animals are raising humans",
+            "But the Animals starts to fight you"
+        ]
+    },
+    puzzle: {
+        title: "Puzzle Game",
+        twists: [
+            "But you need to hunt the puzzle pieces"
+        ]
+    }
+}
+
+function getGenre() {
+    const genreid = localStorage.getItem('selectedGenre');
+    const genre = GENRES[genreid]
+    return genre;
+}
+
+function gather_data() {
+    const genre = getGenre();
+    const title = genre.title;
+    const randint = getRandomInt(genre.twists.length);
+    const twist = genre.twists[randint];
+    showResult(title, twist)
     return "platformer"
 }
-function puzzle(){
+function puzzle() {
     return "puzzle"
 }
 
-function genre(form){
+function genre(form) {
     if (form.platformer.checked) {
-        platformer();
-    } else if(form.puzzle.checked){
-        puzzle();
+        localStorage.setItem('selectedGenre', "platformer")
+        gather_data();
+    } else if (form.puzzle.checked) {
+        localStorage.setItem('selectedGenre', "puzzle")
+        gather_data();
+    } else if (form.farming.checked) {
+        localStorage.setItem('selectedGenre', "farming")
+        gather_data();
     }
     return true;
 }
 
 
 
-function showWelcome(){
+function showWelcome() {
     const holder = document.getElementById("form_holder");
     const template = document.getElementById("welcome_page");
 
@@ -70,27 +109,14 @@ function showQuestion(id) {
     if (optionCount > 4) {
         radioDiv.classList.add("two-columns");
     }
-    holder.appendChild(skipButton);
 
 
 }
-function showResult() {
-    const scores = getScores();
-
-    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-
-    const [winner, winnerScore] = sorted[0];
-    const [runnerUp] = sorted[1];
-
-    const result = ENGINE_DESCRIPTIONS[winner];
+function showResult(genre, twist) {
     const holder = document.getElementById("form_holder");
     holder.innerHTML = `
-    <h2>Your Top Pick</h2>
-    <h1>${result.title}</h1>
-    <p>${result.description}</p>
-    <h2>Alternative</h2>
-    <h1>${ENGINE_DESCRIPTIONS[runnerUp].title}</h1>
-    <p>${ENGINE_DESCRIPTIONS[runnerUp].description}</p>
+    <h2>${genre}</h2>
+    <h1>${twist}</h1>   
 `;
     holder.appendChild(resetButton);
     const disclaimerTitle = document.createElement("h2");
@@ -106,14 +132,17 @@ function showResult() {
 }
 
 function showEmail() {
-  const emailSpan = document.getElementById("email");
-  const button = document.getElementById("contact_button");
+    const emailSpan = document.getElementById("email");
+    const button = document.getElementById("contact_button");
 
-  emailSpan.textContent = "contact.sture@gmail.com";
-  emailSpan.style.display = "block";
-  button.style.display = "none";
+    emailSpan.textContent = "contact.sture@gmail.com";
+    emailSpan.style.display = "block";
+    button.style.display = "none";
 }
 
 
 
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
